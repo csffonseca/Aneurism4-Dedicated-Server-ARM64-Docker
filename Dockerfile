@@ -51,5 +51,8 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 # Default working directory
 WORKDIR /home/steam
 
-# Use bash as entrypoint so we can pass custom scripts from host
-ENTRYPOINT ["/bin/bash"]
+ADD --chown=steam ./scripts/entrypoint.sh .
+ADD --chown=steam ./scripts/aniv-ds.sh .
+
+# Start server
+ENTRYPOINT ["./entrypoint.sh"]

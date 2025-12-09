@@ -1,19 +1,18 @@
 services:
-  satisfactory-server:
-    image: 'satisfactory-arm64'
-    container_name: 'satisfactory-server'
+  aneurism-iv:
+    build: .
     ports:
-      - '7777:7777/udp'
-      - '7777:7777/tcp'
-      - '8888:8888/tcp'
-    restart: 'unless-stopped'
-    environment:
-      - EXTRA_PARAMS=-log -unattended -ini:Engine:[HTTPServer.Listeners]:DefaultBindAddress=any
-      - ALWAYS_UPDATE_ON_START=true
-    volumes:
-      - './satisfactory:/satisfactory'
-      - './config:/home/steam/.config/Epic'
-      - ./init-server.sh:/home/steam/init-server.sh:rw
-    stdin_open: true
+      - "7777-7779:7777-7779/tcp"
+      - "7777-7779:7777-7779/udp"
+
     tty: true
-    entrypoint: /home/steam/init-server.sh
+    restart: unless-stopped
+    environment:
+      - MAX_PLAYERS=50
+      - BETA=
+    stdin_open: true
+    container_name: aniv-ds
+    user: "1000:1000"
+    volumes:
+      - "./ds:/home/steam/aniv-ds/"
+      - "./config:/home/steam/.config/unity3d/Vellocet/ANEURISM IV"
