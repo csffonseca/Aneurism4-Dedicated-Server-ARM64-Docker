@@ -48,6 +48,8 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 #COPY --chmod=755 --chown=steam:steam ./init-server.sh /home/steam/init-server.sh
 #RUN chmod +x /home/steam/init-server.sh
 
+USER 1000
+
 # Default working directory
 WORKDIR /home/steam
 
